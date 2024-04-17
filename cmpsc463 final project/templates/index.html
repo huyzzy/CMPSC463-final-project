@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sequence Alignment</title>
+    <style>
+        .scoring-matrix {
+            font-family: 'Courier New', Courier, monospace; /* Ensures a monospace font is used */
+            white-space: pre; /* Maintains formatting and spacing */
+            font-size: 16px; /* Adjust the font size as needed */
+            overflow-x: auto; /* Adds horizontal scrolling if the matrix is too wide */
+        }
+    </style>
+</head>
+<body>
+    <h1>Needleman-Wunsch Sequence Alignment</h1>
+    <form method="POST">
+        Sequence 1:<br>
+        <input type="text" name="seq1" value="{{ seq1|default('') }}"><br>
+        Sequence 2:<br>
+        <input type="text" name="seq2" value="{{ seq2|default('') }}"><br>
+        Gap Penalty:<br>
+        <input type="number" name="gap_penalty" value="{{ gap_penalty|default(-1) }}"><br>
+        Match Award:<br>
+        <input type="number" name="match_award" value="{{ match_award|default(1) }}"><br>
+        Mismatch Penalty:<br>
+        <input type="number" name="mismatch_penalty" value="{{ mismatch_penalty|default(-1) }}"><br>
+        <input type="submit" value="Align Sequences">
+    </form>
+    {% if alignment1 %}
+    <h2>Results:</h2>
+    <p>Alignment 1: {{ alignment1 }}</p>
+    <p>Alignment 2: {{ alignment2 }}</p>
+    <h3>Scoring Matrix:</h3>
+    <div class="scoring-matrix">
+        {{ matrix|safe }}
+    </div>
+    {% endif %}
+</body>
+</html>
