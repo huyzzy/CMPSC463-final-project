@@ -3,17 +3,17 @@ import numpy as np
 
 app = Flask(__name__)
 
+
 def print_matrix(mat):
     output = "<pre>"
     for i in range(len(mat)):
-        output += "["
         for j in range(len(mat[i])):
-            output += f"{mat[i][j]:.2f}"
-            if j != len(mat[i]) - 1:
-                output += ",\t"
-        output += "]\n"
+            # Right-align the values with 6 spaces padding for consistency
+            output += f"{mat[i][j]:>6.2f} "
+        output = output.strip() + "\n"  # Strip trailing spaces and add a newline
     output += "</pre>"
     return output
+
 
 def match_score(alpha, beta, match_award, gap_penalty, mismatch_penalty):
     if alpha == beta:
@@ -66,17 +66,35 @@ def needleman_wunsch(seq1, seq2, gap_penalty, match_award, mismatch_penalty):
     align1, align2 = align1[::-1], align2[::-1]
     return align1, align2, matrix_output
 
+
 @app.route('/', methods=['GET', 'POST'])
-def index():
+def align_sequences():
+    result_available = False
+    alignment1 = ''
+    alignment2 = ''
+    matrix = ''
+    seq1 = ''
+    seq2 = ''
+    gap_penalty = -1
+    match_award = 1
+    mismatch_penalty = -1
+    
     if request.method == 'POST':
-        seq1 = request.form['seq1']
-        seq2 = request.form['seq2']
-        gap_penalty = int(request.form['gap_penalty'])
-        match_award = int(request.form['match_award'])
-        mismatch_penalty = int(request.form['mismatch_penalty'])
+        seq1 = request.form.get('seq1', '')
+        seq2 = request.form.get('seq2', '')
+        gap_penalty = int(request.form.get('gap_penalty', -1))
+        match_award = int(request.form.get('match_award', 1))
+        mismatch_penalty = int(request.form.get('mismatch_penalty', -1))
+
+        # Call the sequence alignment function with all required arguments
         alignment1, alignment2, matrix = needleman_wunsch(seq1, seq2, gap_penalty, match_award, mismatch_penalty)
-        return render_template('index.html', alignment1=alignment1, alignment2=alignment2, matrix=matrix, seq1=seq1, seq2=seq2, gap_penalty=gap_penalty, match_award=match_award, mismatch_penalty=mismatch_penalty)
-    return render_template('index.html', alignment1=None, alignment2=None, matrix=None)
+        result_available = True
+    
+    # Pass all form data back to the template, whether it was a POST request or not
+    return render_template('index.html', result_available=result_available, 
+                           alignment1=alignment1, alignment2=alignment2, matrix=matrix,
+                           seq1=seq1, seq2=seq2, gap_penalty=gap_penalty,
+                           match_award=match_award, mismatch_penalty=mismatch_penalty)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) 
