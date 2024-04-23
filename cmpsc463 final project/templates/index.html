@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Sequence Alignment</title>
-    <style>
-        .scoring-matrix {
-            font-family: 'Courier New', Courier, monospace; /* Ensures a monospace font is used */
-            white-space: pre; /* Maintains formatting and spacing */
-            font-size: 16px; /* Adjust the font size as needed */
-            overflow-x: auto; /* Adds horizontal scrolling if the matrix is too wide */
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='combined_style.css') }}">
 </head>
 <body>
     <h1>Needleman-Wunsch Sequence Alignment</h1>
@@ -27,13 +20,15 @@
         <input type="number" name="mismatch_penalty" value="{{ mismatch_penalty|default(-1) }}"><br>
         <input type="submit" value="Align Sequences">
     </form>
-    {% if alignment1 %}
-    <h2>Results:</h2>
-    <p>Alignment 1: {{ alignment1 }}</p>
-    <p>Alignment 2: {{ alignment2 }}</p>
-    <h3>Scoring Matrix:</h3>
-    <div class="scoring-matrix">
-        {{ matrix|safe }}
+    {% if result_available %} <!-- Replace 'result_available' with your actual condition variable -->
+    <div class="output-box">
+        <h2>Results:</h2>
+        <p class="alignment">Alignment 1: <span>{{ alignment1 }}</span></p>
+        <p class="alignment">Alignment 2: <span>{{ alignment2 }}</span></p>
+        <h3>Scoring Matrix:</h3>
+        <div class="scoring-matrix">
+            {{ matrix|safe }}
+        </div>
     </div>
     {% endif %}
 </body>
