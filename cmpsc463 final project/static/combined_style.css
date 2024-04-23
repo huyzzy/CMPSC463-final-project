@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+form {
+    width: 60%; /* Adjust the form width to your preference */
+    margin: 40px auto; /* This will center the form and add margin on top and bottom */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ccc;
+    background: white;
+    text-align: center; /* Aligns inline-elements (like input) text to center */
+}
+
+/* Styles for text and number inputs */
+input[type=text], input[type=number] {
+    width: 50%; /* This is the width of the input fields relative to their parent element, the form */
+    padding: 8px;
+    margin: 10px auto; /* Centers the inputs horizontally */
+    display: block; /* Changes inputs to block elements */
+    box-sizing: border-box; /* Ensures padding doesn't affect the overall width */
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styles for the submit button */
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    width: auto; /* Sizes the button to fit its content */
+    padding: 10px 20px; /* Adjust padding to increase the size of the button */
+    border: none; /* Removes the default border */
+    border-radius: 4px; /* Adds rounded corners to the button */
+    display: block; /* Ensures the button is a block element */
+    margin: 20px auto; /* Centers the button and adds margin on top and bottom */
+}
+
+input[type=submit]:hover {
+    background-color: #45a049; /* Changes the button color on hover */
+}
+
+.output-box {
+    border: 2px solid #ccc; /* Adds a light grey border */
+    border-radius: 4px; /* Rounds the corners */
+    padding: 15px; /* Adds space inside the box */
+    margin: 20px auto; /* Adds space outside the box and centers it */
+    width: 80%; /* Adjusts the width to match the input fields */
+    background-color: #f9f9f9; /* A light grey background */
+    box-shadow: 0 0 10px #ccc; /* A subtle shadow like the input fields */
+    text-align: left; /* Aligns the text to the left */
+    display: block; /* Makes sure the div behaves as a block element */
+}
+.scoring-matrix {
+    font-family: 'Courier New', Courier, monospace; /* Ensures a monospace font */
+    white-space: pre; /* Maintains formatting and spacing */
+    font-size: 16px; /* Adjust the font size as needed */
+    overflow-x: auto; /* Adds horizontal scrolling if the matrix is too wide */
+    margin: 0; /* Removes any default margins */
+    padding: 10px; /* Adds some padding inside the box */
+    background-color: #f9f9f9; /* Background color of the box */
+    border: 1px solid #ccc; /* Border around the matrix */
+    display: inline-block; /* Makes the div wrap tightly around the content */
+}
+.alignment {
+    font-family: 'Consolas', 'Lucida Console', 'Menlo', monospace; /* Use a monospaced font for equal character width */
+    white-space: pre; /* Preserves whitespace and line breaks */
+    display: block; /* Puts each alignment on a new line */
+}
